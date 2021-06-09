@@ -1,0 +1,17 @@
+<section class="center-block">
+  <h2>Available redirects</h2>
+
+  <mat-list class="inline-list">
+    <mat-list-item *ngFor="let re of redirects" class="list-item">
+      <a href="{{getPath(re.short)}}">{{getPath(re.short)}}</a> -> <a href="{{re.target}}">{{re.target}}</a>
+    </mat-list-item>
+  </mat-list>
+
+  <ul>
+    <div *ngFor="let re of redirects">
+      <!--<a href="{{getPath(re.short)}}">{{getPath(re.short)}}</a> -> <a href="{{re.target}}">{{re.target}}</a>-->
+
+    </div>
+  </ul>
+
+</section>
