@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import {Redirect} from "../models/redirect";
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {CreateComponent} from "./create/create.component";
 
 @Component({
   selector: 'app-redirect-creator',
-  templateUrl: './redirect-creator.component.html',
-  styleUrls: ['./redirect-creator.component.sass']
+  templateUrl: './redirect-manager.component.html',
+  styleUrls: ['./redirect-manager.component.sass']
 })
 
 
-export class RedirectCreatorComponent implements OnInit {
+export class RedirectManagerComponent implements OnInit {
 
   redirects: Redirect[] = [
     {short: "abcdef12", target: "https://yandex.ru/", useCount: 0},
@@ -21,7 +23,7 @@ export class RedirectCreatorComponent implements OnInit {
     return this.basePath + "/" + short;
   }
 
-  constructor() { }
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
   }
@@ -34,5 +36,13 @@ export class RedirectCreatorComponent implements OnInit {
     if (this.redirects.includes(redirect)) {
       this.redirects = this.redirects.filter(x => x != redirect)
     }
+  }
+
+  create() {
+    const dialogRef = this.dialog.open(CreateComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }
