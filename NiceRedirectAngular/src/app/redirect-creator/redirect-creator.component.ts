@@ -11,9 +11,9 @@ import {Redirect} from "../models/redirect";
 export class RedirectCreatorComponent implements OnInit {
 
   redirects: Redirect[] = [
-    {short: "abcdef12", target: "google.com"},
-    {short: "ff32f324", target: "yandex.ru"},
-    {short: "aaaaaaaa", target: "gmail.com"}
+    {short: "abcdef12", target: "https://yandex.ru/", useCount: 0},
+    {short: "ff32f324", target: "https://github.com/", useCount: 2},
+    {short: "aaaaaaaa", target: "https://www.youtube.com/", useCount: 3}
   ]
 
   basePath: string = window.location.origin;
@@ -26,11 +26,13 @@ export class RedirectCreatorComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  save() {
-
+  info(redirect: Redirect) {
+    alert(redirect.target)
   }
 
-  undo() {
-
+  delete(redirect: Redirect) {
+    if (this.redirects.includes(redirect)) {
+      this.redirects = this.redirects.filter(x => x != redirect)
+    }
   }
 }

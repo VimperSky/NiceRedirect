@@ -1,5 +1,55 @@
 .header-text
   font-size: 24px
+  margin: 0
 
-.redirect_header
-  font-size: 16px
+.redirect_items_box
+  $base-items-margin: 30px
+
+  display: flex
+  flex-direction: column
+  align-items: center
+  margin-top: $base-items-margin
+
+  .redirect_mat_list_item
+    display: flex
+    flex-direction: column
+    align-items: center
+    margin-top: $base-items-margin
+    margin-bottom: $base-items-margin
+
+  .redirect_item_box
+    $redirect-item-width: 300px
+    width: $redirect-item-width
+    margin-bottom: $base-items-margin * 2
+    float: left
+
+    .redirect_item_short
+      margin: 0 0 0 5px
+      float: left
+      overflow-wrap: anywhere
+
+    .redirect_item_info
+      margin: 0 5px 0 0
+      float: right
+
+    .redirect_item_use_count
+      vertical-align: top
+
+    .redirect_item_target
+      clear: both
+      margin: 0 0 0 5px
+      float: left
+      max-width: $redirect-item-width
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
+
+  .redirect_item_actions
+    float: right
+    display: flex
+    flex-direction: column
+    align-items: center
+    margin-bottom: $base-items-margin * 2
+
+  .redirect_item_icon
+    font-size: 20px
