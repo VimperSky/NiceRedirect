@@ -1,4 +1,22 @@
+<h1 mat-dialog-title>Create a redirect</h1>
+
+<div mat-dialog-content>
+  <form>
+    <mat-form-field>
+      <mat-label>Target website</mat-label>
+      <input type="url" matInput [formControl]="target" placeholder="https://www.google.com/">
+      <mat-error *ngIf="target.hasError('pattern') && !target.hasError('required')">
+        Please enter a valid url
+      </mat-error>
+      <mat-error *ngIf="target.hasError('required')">
+        Url is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </form>
+
+</div>
+
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button (click)="onNoClick()">Ok</button>
+  <button mat-button (click)="cancelButton()">Cancel</button>
+  <button mat-button [disabled]="!target.valid" (click)="okButton()">Ok</button>
 </div>

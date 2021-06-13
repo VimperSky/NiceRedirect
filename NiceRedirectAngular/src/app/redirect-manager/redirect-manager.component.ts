@@ -42,7 +42,10 @@ export class RedirectManagerComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      if (!result) return;
+
+      let value = result as string;
+      this.redirects.push({short: "abcdef2", target: value, useCount: 0})
     });
   }
 }

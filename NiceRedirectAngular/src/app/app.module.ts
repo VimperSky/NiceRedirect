@@ -12,6 +12,9 @@ import {MatIconModule} from "@angular/material/icon";
 import {RedirectManagerComponent} from "./redirect-manager/redirect-manager.component";
 import { CreateComponent } from './redirect-manager/create/create.component';
 import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from "@angular/material/dialog";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 
@@ -30,7 +33,11 @@ import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from "@angular/material/dia
     AppRoutingModule,
     MatListModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   bootstrap: [AppComponent],
   providers: [
