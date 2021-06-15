@@ -1,5 +1,5 @@
 export interface Redirect {
-  short: string;
+  shortLink: string;
   target: string;
   useCount: number;
 }

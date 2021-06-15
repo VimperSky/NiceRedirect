@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import {Redirect} from "../models/redirect";
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {CreateComponent} from "./create/create.component";
+import {RedirectService} from "../services/redirect.service";
 
 @Component({
   selector: 'app-redirect-creator',
@@ -13,9 +14,9 @@ import {CreateComponent} from "./create/create.component";
 export class RedirectManagerComponent implements OnInit {
 
   redirects: Redirect[] = [
-    {short: "abcdef12", target: "https://yandex.ru/", useCount: 0},
-    {short: "ff32f324", target: "https://github.com/", useCount: 2},
-    {short: "aaaaaaaa", target: "https://www.youtube.com/", useCount: 3}
+    {shortLink: "abcdef12", target: "https://yandex.ru/", useCount: 0},
+    {shortLink: "ff32f324", target: "https://github.com/", useCount: 2},
+    {shortLink: "aaaaaaaa", target: "https://www.youtube.com/", useCount: 3}
   ]
 
   basePath: string = window.location.origin;
@@ -23,7 +24,7 @@ export class RedirectManagerComponent implements OnInit {
     return this.basePath + "/" + short;
   }
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private redirectService: RedirectService) {}
 
   ngOnInit(): void {
   }
@@ -45,7 +46,9 @@ export class RedirectManagerComponent implements OnInit {
       if (!result) return;
 
       let value = result as string;
-      this.redirects.push({short: "abcdef2", target: value, useCount: 0})
+      this.redirectService.generateRedirect(value).subscribe((redirect: Redirect) => {
+        this.redirects.push(redirect);
+      })
     });
   }
 }

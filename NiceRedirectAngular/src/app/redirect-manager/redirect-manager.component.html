@@ -4,7 +4,7 @@
   <mat-list class="redirect_items_box">
     <mat-list-item *ngFor="let re of redirects" class="redirect_mat_list_item">
       <div class="redirect_item_box">
-        <p class="redirect_item_short">Shortcut: <b>{{re.short}}</b></p>
+        <p class="redirect_item_short">Shortcut: <b>{{re.shortLink}}</b></p>
         <div class="redirect_item_info">
           <mat-icon class="redirect_item_icon">shortcut</mat-icon>
           <span class="redirect_item_use_count">{{re.useCount}}</span>

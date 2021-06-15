@@ -3,6 +3,6 @@
     public class Redirect
     {
         public string ShortLink { get; init; }
-        public string FullLink { get; init; }
+        public string Target { get; init; }
     }
 }
