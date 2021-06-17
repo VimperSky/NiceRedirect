@@ -1,6 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Linq;
-using NiceRedirectServer.Models;
+using NiceRedirectServer.Db.Models;
 
 namespace NiceRedirectServer.Storage
 {

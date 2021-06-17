@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NiceRedirectServer.Db.Models;
 using NiceRedirectServer.Logic;
-using NiceRedirectServer.Models;
 using NiceRedirectServer.Storage;
 
 namespace NiceRedirectServer.Controllers

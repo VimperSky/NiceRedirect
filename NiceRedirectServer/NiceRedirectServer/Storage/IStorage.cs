@@ -1,4 +1,4 @@
-﻿using NiceRedirectServer.Models;
+﻿using NiceRedirectServer.Db.Models;
 
 namespace NiceRedirectServer.Storage
 {

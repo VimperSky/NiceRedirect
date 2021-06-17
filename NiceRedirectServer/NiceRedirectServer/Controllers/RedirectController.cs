@@ -3,7 +3,7 @@ using System.IO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using NiceRedirectServer.Models;
+using NiceRedirectServer.Db.Models;
 using NiceRedirectServer.Storage;
 
 namespace NiceRedirectServer.Controllers
