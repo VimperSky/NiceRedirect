@@ -2,7 +2,7 @@
 {
     public class Redirect
     {
-        public string ShortLink { get; init; }
+        public string Key { get; init; }
         public string Target { get; init; }
     }
 }

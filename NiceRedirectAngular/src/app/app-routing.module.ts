@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {HomeComponent} from "./home/home.component";
 import {RedirectManagerComponent} from "./redirect-manager/redirect-manager.component";
+import {NotFoundComponent} from "./not-found/not-found.component";
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: '',
     component: HomeComponent
   },
   {
@@ -13,14 +14,13 @@ const routes: Routes = [
     component: RedirectManagerComponent
   },
   {
-    path: '',
-    redirectTo: '/home',
-    pathMatch: 'full'
+    path: 'not-found',
+    component: NotFoundComponent
   },
   {
     path: '**',
-    redirectTo: '/home',
-    pathMatch: 'full'
+    redirectTo: "/not-found",
+    pathMatch: 'full',
   }
 ];
 

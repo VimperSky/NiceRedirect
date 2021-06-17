@@ -12,7 +12,7 @@ const urlPattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
 
 @Component({
   selector: 'app-create',
-  templateUrl: './create.component.html',
+  templateUrl: './create-components.component.html',
   styleUrls: ['./create.component.sass']
 })
 

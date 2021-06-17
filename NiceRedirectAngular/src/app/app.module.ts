@@ -10,12 +10,14 @@ import { AppRoutingModule } from './app-routing.module';
 import {MatListModule} from "@angular/material/list";
 import {MatIconModule} from "@angular/material/icon";
 import {RedirectManagerComponent} from "./redirect-manager/redirect-manager.component";
-import { CreateComponent } from './redirect-manager/create/create.component';
+import { CreateComponent } from './redirect-manager/create/create-components.component';
 import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from "@angular/material/dialog";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import { NotFoundComponent } from './not-found/not-found.component';
+import {ClipboardModule} from "@angular/cdk/clipboard";
 
 
 
@@ -24,7 +26,8 @@ import {HttpClientModule} from "@angular/common/http";
     AppComponent,
     RedirectManagerComponent,
     HomeComponent,
-    CreateComponent
+    CreateComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,8 @@ import {HttpClientModule} from "@angular/common/http";
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ClipboardModule
   ],
   bootstrap: [AppComponent],
   providers: [

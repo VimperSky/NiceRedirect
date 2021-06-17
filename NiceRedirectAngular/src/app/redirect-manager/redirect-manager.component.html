@@ -1,19 +1,23 @@
 <section class="center-block">
   <h2 class="header-text">Available redirects</h2>
 
+  <div *ngIf="redirects.length == 0" class="no-redirects-box">
+    <p>You haven't any redirects created. It's time to create a  one!</p>
+  </div>
+
   <mat-list class="redirect_items_box">
     <mat-list-item *ngFor="let re of redirects" class="redirect_mat_list_item">
       <div class="redirect_item_box">
-        <p class="redirect_item_short">Shortcut: <b>{{re.shortLink}}</b></p>
-        <div class="redirect_item_info">
+        <p class="redirect_item_short">Shortcut: <b>{{re.key}}</b></p>
+        <!--<div class="redirect_item_info">
           <mat-icon class="redirect_item_icon">shortcut</mat-icon>
           <span class="redirect_item_use_count">{{re.useCount}}</span>
-        </div>
+        </div>-->
         <p class="redirect_item_target">Target: <b>{{re.target}}</b></p>
       </div>
       <div class="redirect_item_actions">
-        <button mat-button (click)="info(re)" >
-          <mat-icon class="redirect_item_icon">info</mat-icon>
+        <button mat-button [cdkCopyToClipboard]="copy(re)">
+          <mat-icon class="redirect_item_icon">content_copy</mat-icon>
         </button>
         <button mat-button (click)="delete(re)">
           <mat-icon class="redirect_item_icon">delete</mat-icon>
