@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using NiceRedirectServer.Data;
 using NiceRedirectServer.Logic;
 using NiceRedirectServer.Storage;
 
@@ -21,7 +23,12 @@ namespace NiceRedirectServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<RedirectContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.Configure<EndPointOptions>(Configuration.GetSection(EndPointOptions.Name));
+            
+            services.AddDatabaseDeveloperPageExceptionFilter();
+            
             services.AddCors();
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -29,7 +36,7 @@ namespace NiceRedirectServer
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "NiceRedirectServer", Version = "v1"});
             });
 
-            services.AddSingleton<IStorage, TempStorage>();
+            services.AddScoped<IStorage, DbStorage>();
             services.AddScoped<RedirectCreator>();
         }
 
@@ -55,8 +62,6 @@ namespace NiceRedirectServer
                 .WithOrigins("http://localhost:4200"));
             
             
-            app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

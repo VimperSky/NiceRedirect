@@ -4,6 +4,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import {CreateComponent} from "./create/create-components.component";
 import {RedirectService} from "../services/redirect.service";
 import {environment} from "../../environments/environment";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-redirect-creator',
@@ -33,7 +34,11 @@ export class RedirectManagerComponent implements OnInit {
 
   delete(redirect: Redirect) {
     if (this.redirects.includes(redirect)) {
-      this.redirects = this.redirects.filter(x => x != redirect)
+      this.redirectService.deleteRedirect(redirect.key).subscribe(
+        () =>
+          this.redirects = this.redirects.filter(x => x != redirect),
+        (error: HttpErrorResponse) =>
+          console.log('Error happened while processing delete redirect' + error))
     }
   }
 

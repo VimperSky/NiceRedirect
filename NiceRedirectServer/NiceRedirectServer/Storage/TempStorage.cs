@@ -1,31 +1,33 @@
-﻿using System.Collections.Concurrent;
-using System.Linq;
-using NiceRedirectServer.Db.Models;
-
-namespace NiceRedirectServer.Storage
-{
-    public class TempStorage: IStorage
-    {
-        private readonly ConcurrentDictionary<string, Redirect> _redirects = new();
-
-        public bool HasRedirect(string key)
-        {
-            return _redirects.ContainsKey(key);
-        }
-
-        public Redirect GetRedirect(string key)
-        {
-            return HasRedirect(key) ? _redirects[key] : null;
-        }
-
-        public void AddRedirect(Redirect redirect)
-        {
-            _redirects[redirect.Key] = redirect;
-        }
-
-        public Redirect[] GetRedirects()
-        {
-            return _redirects.Values.ToArray();
-        }
-    }
-}
+﻿// using System.Collections.Concurrent;
+// using System.Linq;
+// using System.Threading.Tasks;
+// using NiceRedirectServer.Models;
+//
+// namespace NiceRedirectServer.Storage
+// {
+//     public class TempStorage: IStorage
+//     {
+//         private readonly ConcurrentDictionary<string, Redirect> _redirects = new();
+//
+//         public Task<bool> HasRedirect(string key)
+//         {
+//             return Task.FromResult(_redirects.ContainsKey(key));
+//         }
+//
+//         public Task<Redirect> GetRedirect(string key)
+//         {
+//             return Task.FromResult(HasRedirect(key).Result ? _redirects[key] : null);
+//         }
+//
+//         public Task AddRedirect(Redirect redirect)
+//         {
+//             _redirects[redirect.Key] = redirect;
+//             return Task.CompletedTask;
+//         }
+//
+//         public Task<Redirect[]> GetRedirects()
+//         {
+//             return Task.FromResult(_redirects.Values.ToArray());
+//         }
+//     }
+// }

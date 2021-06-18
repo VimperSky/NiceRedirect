@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using NiceRedirectServer.Db.Models;
+using NiceRedirectServer.Models;
 using NiceRedirectServer.Storage;
 
 namespace NiceRedirectServer.Logic
@@ -30,7 +31,7 @@ namespace NiceRedirectServer.Logic
             return new string(chars);
         }
         
-        public Redirect Create(string target)
+        public async Task<Redirect> Create(string target)
         {
             string shortLink;
 
@@ -38,10 +39,10 @@ namespace NiceRedirectServer.Logic
             {
                 shortLink = GenerateString(8);
             }
-            while (_storage.HasRedirect(shortLink)); // избегаем конфликтов.
+            while (await _storage.GetRedirect(shortLink) != null); // избегаем конфликтов.
             
             var redirect = new Redirect {Key = shortLink, Target = target};
-            _storage.AddRedirect(redirect);
+            await _storage.AddRedirect(redirect);
             
             return redirect;
         }

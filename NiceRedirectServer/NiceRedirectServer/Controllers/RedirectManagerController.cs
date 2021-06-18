@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using NiceRedirectServer.Db.Models;
+﻿using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using NiceRedirectServer.Logic;
+using NiceRedirectServer.Models;
 using NiceRedirectServer.Storage;
 
 namespace NiceRedirectServer.Controllers
@@ -20,15 +23,24 @@ namespace NiceRedirectServer.Controllers
         }
         
         [HttpPost("Create")]
-        public Redirect Post([FromBody]string target)
+        public async Task<Redirect> Post([FromBody]string target)
         {
-            return _redirectCreator.Create(target);
+            return await _redirectCreator.Create(target);
         }
         
         [HttpGet("List")]
-        public ActionResult<Redirect> Get()
+        public async Task<ActionResult<Redirect>> Get()
         {
-            return Ok(_storage.GetRedirects());
+            return Ok(await _storage.GetRedirects());
+        }
+        
+        [HttpDelete("Delete")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Delete([FromQuery]string key)
+        {
+            var deleted = await _storage.DeleteRedirect(key);
+            return deleted ? Ok() : NotFound();
         }
     }
 }

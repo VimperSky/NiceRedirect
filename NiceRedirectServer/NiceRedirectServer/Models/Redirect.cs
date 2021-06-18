@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 
-namespace NiceRedirectServer.Db.Models
+namespace NiceRedirectServer.Models
 {
     [Index(nameof(Key), IsUnique = true)]
     public class Redirect

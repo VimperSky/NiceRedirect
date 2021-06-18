@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {fixUrl} from "../../tools/url";
 
 const urlPattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
   '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
@@ -30,7 +31,7 @@ export class CreateComponent implements OnInit {
   }
 
   okButton() {
-    this.dialogRef.close(this.target.value);
+    this.dialogRef.close(fixUrl(this.target.value));
   }
 
   cancelButton() {

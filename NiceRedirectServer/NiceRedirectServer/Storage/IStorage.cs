@@ -1,14 +1,17 @@
-﻿using NiceRedirectServer.Db.Models;
+﻿using System.Threading.Tasks;
+using NiceRedirectServer.Models;
 
 namespace NiceRedirectServer.Storage
 {
     public interface IStorage
     {
-        bool HasRedirect(string key);
-        Redirect GetRedirect(string key);
+        Task<Redirect> GetRedirect(string key);
 
-        void AddRedirect(Redirect redirect);
+        Task AddRedirect(Redirect redirect);
+        
+        Task<bool> DeleteRedirect(string key);
 
-        Redirect[] GetRedirects();
+        Task<Redirect[]> GetRedirects();
+       
     }
 }

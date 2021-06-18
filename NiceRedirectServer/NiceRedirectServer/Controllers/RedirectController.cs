@@ -1,9 +1,10 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using NiceRedirectServer.Db.Models;
+using NiceRedirectServer.Models;
 using NiceRedirectServer.Storage;
 
 namespace NiceRedirectServer.Controllers
@@ -25,16 +26,16 @@ namespace NiceRedirectServer.Controllers
             Redirect(Path.Combine(_endPointOptions.Value.FrontEndAddress,_endPointOptions.Value.NotFoundAddress));
 
         [HttpGet]
-        public ActionResult<Redirect> DoRedirect(string key)
+        public async Task<ActionResult<Redirect>> DoRedirect(string key)
         {
             if (string.IsNullOrWhiteSpace(key))
                 return NotFoundRedirect();
             
-            var redirect = _storage.GetRedirect(key);
+            var redirect = await _storage.GetRedirect(key);
             if (redirect == null) // Redirect to Angular NotFound page
                 return NotFoundRedirect();
 
-            return Redirect(new UriBuilder(redirect.Target).Uri.ToString());
+            return Redirect(redirect.Target);
         }
     }
 }

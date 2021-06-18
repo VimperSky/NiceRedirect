@@ -9,11 +9,7 @@
     <mat-list-item *ngFor="let re of redirects" class="redirect_mat_list_item">
       <div class="redirect_item_box">
         <p class="redirect_item_short">Shortcut: <b>{{re.key}}</b></p>
-        <!--<div class="redirect_item_info">
-          <mat-icon class="redirect_item_icon">shortcut</mat-icon>
-          <span class="redirect_item_use_count">{{re.useCount}}</span>
-        </div>-->
-        <p class="redirect_item_target">Target: <b>{{re.target}}</b></p>
+        <p class="redirect_item_target">Target: <a href="{{re.target}}">{{re.target}}</a></p>
       </div>
       <div class="redirect_item_actions">
         <button mat-button [cdkCopyToClipboard]="copy(re)">
