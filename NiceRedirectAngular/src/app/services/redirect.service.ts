@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpParams} from "@angular/common/http";
-import {Observable, throwError} from "rxjs";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {Observable} from "rxjs";
 import {Redirect} from "../models/redirect";
 import {environment} from "../../environments/environment";
-import { catchError } from 'rxjs/operators';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+  })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -11,17 +16,16 @@ import { catchError } from 'rxjs/operators';
 export class RedirectService {
   constructor(private http: HttpClient) { }
 
-
   generateRedirect(target: string): Observable<Redirect> {
-    return this.http.post<Redirect>(environment.apiUrl + "/RedirectManager/Create", JSON.stringify(target))
+    return this.http.post<Redirect>(environment.apiUrl + "/RedirectManager/Create", JSON.stringify(target), httpOptions)
   }
 
   getAllRedirects(): Observable<Redirect[]> {
-    return this.http.get<Redirect[]>(environment.apiUrl + "/RedirectManager/List")
+    return this.http.get<Redirect[]>(environment.apiUrl + "/RedirectManager/List", httpOptions)
   }
 
   deleteRedirect(key: string): Observable<Object> {
-    const options =  { params: new HttpParams().set('key', key) };
+    const options =  { headers: httpOptions.headers, params: new HttpParams().set('key', key) };
     return this.http.delete(environment.apiUrl + "/RedirectManager/Delete", options);
   }
 }
