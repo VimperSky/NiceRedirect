@@ -9,8 +9,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NiceRedirectServer.Migrations
 {
     [DbContext(typeof(RedirectContext))]
-    [Migration("20210618135610_init")]
-    partial class init
+    [Migration("20210619160221_2")]
+    partial class _2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,15 +25,39 @@ namespace NiceRedirectServer.Migrations
                     b.Property<string>("Key")
                         .HasColumnType("text");
 
-                    b.Property<string>("Target")
-                        .HasColumnType("text");
-
                     b.HasKey("Key");
 
                     b.HasIndex("Key")
                         .IsUnique();
 
                     b.ToTable("Redirect");
+                });
+
+            modelBuilder.Entity("NiceRedirectServer.Models.Redirect", b =>
+                {
+                    b.OwnsOne("NiceRedirectServer.Models.RedirectData", "Data", b1 =>
+                        {
+                            b1.Property<string>("RedirectKey")
+                                .HasColumnType("text");
+
+                            b1.Property<string>("Password")
+                                .HasColumnType("text");
+
+                            b1.Property<string>("Target")
+                                .HasColumnType("text");
+
+                            b1.Property<byte>("Type")
+                                .HasColumnType("smallint");
+
+                            b1.HasKey("RedirectKey");
+
+                            b1.ToTable("Redirect");
+
+                            b1.WithOwner()
+                                .HasForeignKey("RedirectKey");
+                        });
+
+                    b.Navigation("Data");
                 });
 #pragma warning restore 612, 618
         }

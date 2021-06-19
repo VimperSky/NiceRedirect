@@ -1,14 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {fixUrl} from "../../tools/url";
+import {fixUrl, urlPattern} from "../../tools/url";
 
-const urlPattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
-  '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
-  '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
-  '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
-  '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
-  '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
 
 
 @Component({
@@ -22,6 +16,8 @@ export class CreateComponent implements OnInit {
     Validators.required,
     Validators.pattern(urlPattern),
   ]);
+  hide: boolean = true;
+  password: string = "";
 
 
   constructor(public dialogRef: MatDialogRef<CreateComponent>) {}
@@ -31,7 +27,8 @@ export class CreateComponent implements OnInit {
   }
 
   okButton() {
-    this.dialogRef.close(fixUrl(this.target.value));
+    alert (this.password)
+    this.dialogRef.close({value: fixUrl(this.target.value), password: this.password});
   }
 
   cancelButton() {

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NiceRedirectServer.Logic;
@@ -23,13 +22,13 @@ namespace NiceRedirectServer.Controllers
         }
         
         [HttpPost("Create")]
-        public async Task<Redirect> Post([FromBody]string target)
+        public async Task<Redirect> Post([FromBody]RedirectData redirectData)
         {
-            return await _redirectCreator.Create(target);
+            return await _redirectCreator.Create(redirectData);
         }
         
         [HttpGet("List")]
-        public async Task<ActionResult<Redirect>> Get()
+        public async Task<ActionResult<Redirect[]>> Get()
         {
             return Ok(await _storage.GetRedirects());
         }

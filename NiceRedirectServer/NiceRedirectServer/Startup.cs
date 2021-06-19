@@ -58,6 +58,7 @@ namespace NiceRedirectServer
             app.UseCors(builder => builder
                 .AllowAnyMethod()
                 .AllowAnyHeader()
+                .AllowAnyOrigin()
                 .AllowCredentials()
                 .WithOrigins("http://localhost:4200"));
             

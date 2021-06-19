@@ -18,6 +18,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { NotFoundComponent } from './not-found/not-found.component';
 import {ClipboardModule} from "@angular/cdk/clipboard";
+import { FormWithPasswordComponent } from './redirect-form/form-with-password/form-with-password.component';
 
 
 
@@ -27,7 +28,8 @@ import {ClipboardModule} from "@angular/cdk/clipboard";
     RedirectManagerComponent,
     HomeComponent,
     CreateComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    FormWithPasswordComponent
   ],
   imports: [
     BrowserModule,

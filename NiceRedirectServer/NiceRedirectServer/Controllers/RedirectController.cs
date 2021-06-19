@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -24,7 +23,8 @@ namespace NiceRedirectServer.Controllers
 
         private RedirectResult NotFoundRedirect() =>
             Redirect(Path.Combine(_endPointOptions.Value.FrontEndAddress,_endPointOptions.Value.NotFoundAddress));
-
+        
+        
         [HttpGet]
         public async Task<ActionResult<Redirect>> DoRedirect(string key)
         {
@@ -35,7 +35,16 @@ namespace NiceRedirectServer.Controllers
             if (redirect == null) // Redirect to Angular NotFound page
                 return NotFoundRedirect();
 
-            return Redirect(redirect.Target);
+            if (redirect.Data.Type is RedirectType.WithPassword)
+            {
+                var queryString = System.Web.HttpUtility.ParseQueryString(string.Empty);
+                queryString.Add("key", redirect.Key);
+                return Redirect(Path.Combine(_endPointOptions.Value.FrontEndAddress, 
+                    _endPointOptions.Value.FormWithPasswordAddress, queryString.ToQueryString()));
+            }
+
+            return Redirect(redirect.Data.Target);
+            
         }
     }
 }

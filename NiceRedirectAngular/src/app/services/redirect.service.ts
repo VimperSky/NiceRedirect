@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Redirect} from "../models/redirect";
+import {Redirect, RedirectData} from "../models/redirectData";
 import {environment} from "../../environments/environment";
+import {RedirectWithPassword} from "../models/redirect-with-password";
 
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
+    'Access-Control-Allow-Origin': "*"
   })
 };
 
@@ -14,10 +16,11 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class RedirectService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  generateRedirect(target: string): Observable<Redirect> {
-    return this.http.post<Redirect>(environment.apiUrl + "/RedirectManager/Create", JSON.stringify(target), httpOptions)
+  generateRedirect(data: RedirectData): Observable<Redirect> {
+    return this.http.post<Redirect>(environment.apiUrl + "/RedirectManager/Create", data, httpOptions)
   }
 
   getAllRedirects(): Observable<Redirect[]> {
@@ -25,8 +28,11 @@ export class RedirectService {
   }
 
   deleteRedirect(key: string): Observable<Object> {
-    const options =  { headers: httpOptions.headers, params: new HttpParams().set('key', key) };
+    const options = {...httpOptions, params: new HttpParams().set('key', key)};
     return this.http.delete(environment.apiUrl + "/RedirectManager/Delete", options);
   }
-}
 
+  verifyRedirect(redirect: RedirectWithPassword): Observable<boolean> {
+    return this.http.post<boolean>(environment.apiUrl + "/RedirectForm/ProcessPasswordForm", redirect, httpOptions)
+  }
+}

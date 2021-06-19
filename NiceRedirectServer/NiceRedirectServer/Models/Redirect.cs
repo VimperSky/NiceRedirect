@@ -8,6 +8,6 @@ namespace NiceRedirectServer.Models
     {
         [Key]
         public string Key { get; init; }
-        public string Target { get; init; }
+        public RedirectData Data { get; init; }
     }
 }

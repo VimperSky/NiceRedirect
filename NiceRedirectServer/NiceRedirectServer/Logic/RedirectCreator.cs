@@ -31,7 +31,7 @@ namespace NiceRedirectServer.Logic
             return new string(chars);
         }
         
-        public async Task<Redirect> Create(string target)
+        public async Task<Redirect> Create(RedirectData redirectData)
         {
             string shortLink;
 
@@ -41,10 +41,10 @@ namespace NiceRedirectServer.Logic
             }
             while (await _storage.GetRedirect(shortLink) != null); // избегаем конфликтов.
             
-            var redirect = new Redirect {Key = shortLink, Target = target};
-            await _storage.AddRedirect(redirect);
+            var redirectFull = new Redirect {Key = shortLink, Data = redirectData};
+            await _storage.AddRedirect(redirectFull);
             
-            return redirect;
+            return redirectFull;
         }
     }
 }

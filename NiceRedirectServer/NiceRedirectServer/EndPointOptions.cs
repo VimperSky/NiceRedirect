@@ -7,5 +7,7 @@
         public string FrontEndAddress { get; init; }
         
         public string NotFoundAddress { get; init; }
+        
+        public string FormWithPasswordAddress { get; init; }
     }
 }

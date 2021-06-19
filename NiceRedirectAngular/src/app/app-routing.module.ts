@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {HomeComponent} from "./home/home.component";
 import {RedirectManagerComponent} from "./redirect-manager/redirect-manager.component";
 import {NotFoundComponent} from "./not-found/not-found.component";
+import {FormWithPasswordComponent} from "./redirect-form/form-with-password/form-with-password.component";
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'not-found',
     component: NotFoundComponent
+  },
+  {
+    path: 'form/password',
+    component: FormWithPasswordComponent,
   },
   {
     path: '**',
