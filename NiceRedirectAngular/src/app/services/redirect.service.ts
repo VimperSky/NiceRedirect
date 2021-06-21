@@ -32,7 +32,7 @@ export class RedirectService {
     return this.http.delete(environment.apiUrl + "/RedirectManager/Delete", options);
   }
 
-  verifyRedirect(redirect: RedirectWithPassword): Observable<boolean> {
-    return this.http.post<boolean>(environment.apiUrl + "/RedirectForm/ProcessPasswordForm", redirect, httpOptions)
+  verifyRedirect(redirect: RedirectWithPassword): Observable<string> {
+    return this.http.post<string>(environment.apiUrl + "/RedirectForm/ProcessPasswordForm", redirect, httpOptions)
   }
 }

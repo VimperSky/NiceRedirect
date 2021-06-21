@@ -12,7 +12,7 @@
         <p class="redirect_item_target">Target: <a href="{{re.data.target}}">{{re.data.target}}</a></p>
       </div>
       <div class="redirect_item_actions">
-        <button mat-button [cdkCopyToClipboard]="copy(re)">
+        <button mat-button [cdkCopyToClipboard]="copy(re)" (click)="openCopyNotification()">
           <mat-icon class="redirect_item_icon">content_copy</mat-icon>
         </button>
         <button mat-button (click)="delete(re)">

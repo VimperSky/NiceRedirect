@@ -16,8 +16,9 @@ export class CreateComponent implements OnInit {
     Validators.required,
     Validators.pattern(urlPattern),
   ]);
+  password = new FormControl('', []);
+
   hide: boolean = true;
-  password: string = "";
 
 
   constructor(public dialogRef: MatDialogRef<CreateComponent>) {}
@@ -27,8 +28,7 @@ export class CreateComponent implements OnInit {
   }
 
   okButton() {
-    alert (this.password)
-    this.dialogRef.close({value: fixUrl(this.target.value), password: this.password});
+    this.dialogRef.close({value: fixUrl(this.target.value), password: this.password.value});
   }
 
   cancelButton() {

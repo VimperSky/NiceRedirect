@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -32,7 +33,7 @@ namespace NiceRedirectServer.Controllers
 
             if (item.Data.Password == redirectWithPassword.Password)
             {
-                return Redirect(item.Data.Target);
+                return Ok(item.Data.Target);
             }
 
             return Unauthorized();

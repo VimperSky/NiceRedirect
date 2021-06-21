@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -49,10 +50,7 @@ namespace NiceRedirectServer
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NiceRedirectServer v1"));
             }
-
-
-            app.UseHttpsRedirection();
-
+            
             app.UseRouting();
             
             app.UseCors(builder => builder

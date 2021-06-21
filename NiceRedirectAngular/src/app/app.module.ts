@@ -19,7 +19,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { NotFoundComponent } from './not-found/not-found.component';
 import {ClipboardModule} from "@angular/cdk/clipboard";
 import { FormWithPasswordComponent } from './redirect-form/form-with-password/form-with-password.component';
-
+import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 
 
 @NgModule({
@@ -45,7 +45,8 @@ import { FormWithPasswordComponent } from './redirect-form/form-with-password/fo
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ClipboardModule
+    ClipboardModule,
+    MatSnackBarModule
   ],
   bootstrap: [AppComponent],
   providers: [

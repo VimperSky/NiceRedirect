@@ -5,6 +5,7 @@ import {CreateComponent} from "./create/create-components.component";
 import {RedirectService} from "../services/redirect.service";
 import {environment} from "../../environments/environment";
 import {HttpErrorResponse} from "@angular/common/http";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-redirect-creator',
@@ -22,7 +23,7 @@ export class RedirectManagerComponent implements OnInit {
     return this.basePath + "/" + short;
   }
 
-  constructor(public dialog: MatDialog, private redirectService: RedirectService) {}
+  constructor(public dialog: MatDialog, private redirectService: RedirectService, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.redirectService.getAllRedirects().subscribe((redirects: Redirect[]) => this.redirects = redirects);
@@ -57,5 +58,9 @@ export class RedirectManagerComponent implements OnInit {
         this.redirects.push(redirect);
       })
     });
+  }
+
+  openCopyNotification() {
+    this.snackBar.open("Copied!","", {duration: 2000});
   }
 }
